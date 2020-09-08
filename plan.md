@@ -11,4 +11,5 @@ everythig outputs to a file.
 
 called scans
 
-we will also intend to 
+we will also intend to add features for subdomains and vhosts
+
