@@ -5,7 +5,12 @@ This is a simple bash script that takes an ip and/or a port and performs lots of
 ## Setup:
 
 ```
-git clone 
+git clone https://github.com/fieldraccoon/LinuxEnumerator.git
+cd LinuxEnumerator
+./install.sh
+```
+## Running it
+
 ```bash
 sudo ./file.sh -i 10.10.10.211 -p 8000                                                                                                                                                                                             3 ⚙
 YOU ARE RUNNING AS ROOT!
