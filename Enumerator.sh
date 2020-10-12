@@ -110,7 +110,8 @@ do
                         echo -e "${GREEN}[+]${BLUE} Scanning Operating systems"
                         echo -e "${GREEN}[+]${BLUE} Scanning Virtul hosts"
                         echo -e "${GREEN}[+]${BLUE} Scanning Directories"
-                        simple_port_directories | advanced_nmap_port | nikto_scan_port | port_os_detection | simple_vhosts_port;;
+                        simple_port_directories | advanced_nmap_port | nikto_scan_port | port_os_detection | simple_vhosts_port
+                        echo -e "${GREEN}[+]${RED} ALL SCANS HAVE FINISHED RUNNING!";;
                 a) advanced=${OPTARG};;
 
                 esac
@@ -200,4 +201,5 @@ then
         echo -e "${GREEN}[+]${BLUE} Scanning Directories" 
 #       echo -e "Something went wrong maybe"
         simple_ports | simple_directories | simple_vhosts | simple_nikto_scan | advanced_nmap
+        echo -e "${GREEN}[+]${RED} ALL SCANS HAVE FINISHED RUNNING!"
 fi
