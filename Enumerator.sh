@@ -1,11 +1,31 @@
 #!/bin/bash
+
+wordlist=/usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+
+cat << 'BANNEREND'
+
+ _     _                  _____
+| |   (_)_ __  _   ___  _| ____|_ __  _   _ _ __ __
+| |   | | '_ \| | | \ \/ /  _| | '_ \| | | | '_ ` _ \
+| |___| | | | | |_| |>  <| |___| | | | |_| | | | | | |
+|_____|_|_| |_|\__,_/_/\_\_____|_| |_|\__,_|_| |_| |_|
+
+BANNEREND
+
+echo "$banner"
+
 if [ "$EUID" -ne 0 ]
 then
-        echo -e "YOU MUST RUN THIS AS ROOT OR SOME SCANS MIGHT NOT WORK!"
+        echo -e "${RED}YOU MUST RUN THIS AS ROOT OR SOME SCANS MIGHT NOT WORK!"
 else
-        echo -e "YOU ARE RUNNING AS ROOT!"
+        echo -e "${RED}YOU ARE RUNNING AS ROOT!"
 fi
-
 
 if [ ! -d "enum" ]
 then
@@ -18,20 +38,6 @@ fi
 # adding colors and other variables
 
 wordlist=/usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
-
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-NC='\033[0m'
-GREEN='\033[0;32m'
-CYAN='\033[0;36m'
-
-
-
-                        echo -e "${GREEN}[+]${BLUE} Loading tools..."
-                        echo -e "${GREEN}[+]${BLUE} Scanning with nmap"
-                        echo -e "${GREEN}[+]${BLUE} Scanning with nikto"
-                        echo -e "${GREEN}[+]${BLUE} Operating systems"
-                        echo -e "${GREEN}[+]${BLUE} Scanning Virtul hosts"
 
 
 function nikto_scan_port()
@@ -97,8 +103,14 @@ do
 
                 p) 
                     rport=${OPTARG}
-                        simple_port_directories | advanced_nmap_port | nikto_scan_port | port_os_detection | simple_vhosts_port
-                        echo -e "${GREEN}[+]${BLUE} Scanning port $rport";;
+
+                        echo -e "${GREEN}[+]${BLUE} Loading tools..."
+                        echo -e "${GREEN}[+]${BLUE} Scanning with nmap"
+                        echo -e "${GREEN}[+]${BLUE} Scanning with nikto"
+                        echo -e "${GREEN}[+]${BLUE} Scanning Operating systems"
+                        echo -e "${GREEN}[+]${BLUE} Scanning Virtul hosts"
+                        echo -e "${GREEN}[+]${BLUE} Scanning Directories"
+                        simple_port_directories | advanced_nmap_port | nikto_scan_port | port_os_detection | simple_vhosts_port;;
                 a) advanced=${OPTARG};;
 
                 esac
@@ -127,8 +139,8 @@ if [[  $rhost == ""  ]]
 then
         echo "sorry you have not specified your host. please use the -i option."
 else
-        ffuf -c -w $wordlist -u http://10.10.10.208/FUZZ > enum/dirs/ffuf.txt    
-        gobuster dir -w $wordlist -u http://$rhost/ > enum/dirs/gobuster.txt
+        ffuf -c -w $wordlist -u http://10.10.10.208/FUZZ > enum/dirs/ffuf-$rhost.txt    
+        gobuster dir -w $wordlist -u http://$rhost/ > enum/dirs/gobuster-$rhost.txt
 fi
 }
 
@@ -140,7 +152,7 @@ if [[  $rhost == ""  ]]
 then
         echo "sorry you have not specified your host. please use the -i option."
 else
-        gobuster vhost -u http://$rhost/ -w $wordlist > enum/misc/gobuster_vhosts.txt
+        gobuster vhost -u http://$rhost/ -w $wordlist > enum/misc/gobuster-$rhost-vhosts.txt
 fi
 }
 
@@ -150,7 +162,7 @@ if [[  $rhost == ""  ]]
 then
         echo "sorry you have not specified your host. please use the -i option."
 else
-        nikto -h $rhost > enum/misc/nikto.txt
+        nikto -h $rhost > enum/misc/nikto-$rhost.txt
 fi
 }
 
@@ -177,12 +189,15 @@ fi
 
 
 
-if [ $rport = "" ]
+if [ $rport == "" ]
 then
+
+        echo -e "${GREEN}[+]${BLUE} Loading tools..."
+        echo -e "${GREEN}[+]${BLUE} Scanning with nmap"
+        echo -e "${GREEN}[+]${BLUE} Scanning with nikto"
+        echo -e "${GREEN}[+]${BLUE} Scanning Operating systems"
+        echo -e "${GREEN}[+]${BLUE} Scanning Virtul hosts"
+        echo -e "${GREEN}[+]${BLUE} Scanning Directories" 
+#       echo -e "Something went wrong maybe"
         simple_ports | simple_directories | simple_vhosts | simple_nikto_scan | advanced_nmap
-else 
-        echo -e "Something went wrong maybe"
-
 fi
-
-echo -e "${GREEN}[+]${BLUE} Finished all scans!"
