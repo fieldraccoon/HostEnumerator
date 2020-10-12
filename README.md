@@ -2,6 +2,10 @@
 
 This is a simple bash script that takes an ip and/or a port and performs lots of scans on it that automates the process of enumeration.
 
+## Setup:
+
+```
+git clone 
 ```bash
 sudo ./file.sh -i 10.10.10.211 -p 8000                                                                                                                                                                                             3 ⚙
 YOU ARE RUNNING AS ROOT!
