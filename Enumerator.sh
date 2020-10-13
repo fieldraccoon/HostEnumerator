@@ -67,8 +67,7 @@ if [[  $rhost == ""  ]]
 then
         echo "sorry you have not specified your host. please use the -i option."
 else
-        wfuzz -w $wordlist --hc 404 http://$rhost:$rport/FUZZ > enum/dirs/wfuzz.txt
-        gobuster dir -w $wordlist -u http://$rhost:$rport/ -o enum/dirs/gobuster.txt
+        gobuster dir -w $wordlist -u http://$rhost:$rport/ -o enum/dirs/gobuster-$rhost-$rport.txt
 fi
 }
 
@@ -140,7 +139,6 @@ if [[  $rhost == ""  ]]
 then
         echo "sorry you have not specified your host. please use the -i option."
 else
-        ffuf -c -w $wordlist -u http://10.10.10.208/FUZZ > enum/dirs/ffuf-$rhost.txt    
         gobuster dir -w $wordlist -u http://$rhost/ > enum/dirs/gobuster-$rhost.txt
 fi
 }
