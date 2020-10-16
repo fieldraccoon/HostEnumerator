@@ -39,7 +39,9 @@ YOU ARE RUNNING AS ROOT!
 ```bash
 ./file.sh -i 10.10.10.211
 ```
-
+```bash
+./file.sh -i 10.10.10.211 -w=/use/share/wordlists/dirbuster/commmon.txt
+```
 ## Output
   
 #### This outputs all your scans into a neat /enum directory with all the scans organized.
