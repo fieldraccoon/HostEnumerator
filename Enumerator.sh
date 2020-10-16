@@ -1,6 +1,5 @@
 #!/bin/bash
 
-wordlist=/usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
 
 RED='\033[0;31m'
 BLUE='\033[0;34m'
@@ -9,13 +8,11 @@ GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 
 cat << 'BANNEREND'
-
  _     _                  _____
 | |   (_)_ __  _   ___  _| ____|_ __  _   _ _ __ __
 | |   | | '_ \| | | \ \/ /  _| | '_ \| | | | '_ ` _ \
 | |___| | | | | |_| |>  <| |___| | | | |_| | | | | | |
 |_____|_|_| |_|\__,_/_/\_\_____|_| |_|\__,_|_| |_| |_|
-
 BANNEREND
 
 echo "$banner"
@@ -36,9 +33,32 @@ fi
 
 
 # adding colors and other variables
+function get_wordlist() 
+{
+    local FLAG="-w="
+    local ARGS=${@}
 
-wordlist=/usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+    for arg in $ARGS
+    do
+        if [[ $arg == $FLAG* ]]; then
+            echo "${arg#$FLAG}"
+            return
+    fi
+    done
 
+}
+
+
+prewordlist=$(get_wordlist "$@")
+
+if [[ "$prewordlist" == ""  ]]
+then
+        wordlist=/usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+else
+        wordlist=$(get_wordlist "$@")
+fi
+
+echo -e "${GREEN}[+]${BLUE} You are using wordlist $wordlist"
 
 function nikto_scan_port()
 {
@@ -188,7 +208,7 @@ fi
 
 
 
-if [ $rport == "" ]
+if [[ $rport == "" ]]
 then
 
         echo -e "${GREEN}[+]${BLUE} Loading tools..."
