@@ -33,14 +33,14 @@ YOU ARE RUNNING AS ROOT!
 ## Examples
 
 ```bash
-./file.sh -i 10.10.10.211 -p 8000
+./Enumerator.sh -i 10.10.10.211 -p 8000
 ```
 
 ```bash
-./file.sh -i 10.10.10.211
+./Enumerator.sh -i 10.10.10.211
 ```
 ```bash
-./file.sh -i 10.10.10.211 -w=/use/share/wordlists/dirbuster/commmon.txt
+./Enumerator.sh -i 10.10.10.211 -w=/use/share/wordlists/dirbuster/commmon.txt
 ```
 ## Output
   
