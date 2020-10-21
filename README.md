@@ -40,7 +40,7 @@ YOU ARE RUNNING AS ROOT!
 ./Enumerator.sh -i 10.10.10.211
 ```
 ```bash
-./Enumerator.sh -i 10.10.10.211 -w=/use/share/wordlists/dirbuster/commmon.txt
+./Enumerator.sh -i 10.10.10.211 --wordlist=/usr/share/wordlists/dirbuster/commmon.txt
 ```
 ## Output
   
