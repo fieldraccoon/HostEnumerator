@@ -28,6 +28,7 @@ YOU ARE RUNNING AS ROOT!
 [+] Scanning Operating systems                                                                                                                                                                                                             
 [+] Scanning Virtul hosts                                                                                                                                                                                                                  
 [+] Scanning Directories 
+[+] PORT 445 IS OPEN YOU CAN CONNECT WITH SMB
 ```
 
 ## Examples
