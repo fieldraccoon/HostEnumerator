@@ -1,5 +1,6 @@
 #!/bin/bash
 
+PATH_TO_NMAP_PARSE_OUTPUT="/opt/nmap-parse-output/nmap-parse-output"
 
 RED='\033[0;31m'
 BLUE='\033[0;34m'
@@ -26,9 +27,9 @@ fi
 
 if [ ! -d "enum" ]
 then
-        mkdir -p enum{/dirs,/ports,/misc}
+        mkdir -p enum{/dirs,/ports,/misc,/smb}
 else 
-        rm -r enum; mkdir -p enum{/dirs,/ports,/misc}
+        rm -r enum; mkdir -p enum{/dirs,/ports,/misc,/smb}
 fi
 
 
@@ -59,6 +60,19 @@ else
 fi
 
 echo -e "${GREEN}[+]${BLUE} You are using wordlist $wordlist"
+
+
+
+smbmap(){
+    IFS=',' read -r -a array <<< $OPEN_PORTS
+
+    if [[ " ${array[@]} " =~ "445" ]]; then
+            smbmap -H $rhost > enum/smb/smbmap_$rhost.txt
+ 
+    else
+            echo "[ERROR] No Standard SMB ports found."
+    fi
+}
 
 function nikto_scan_port()
 {
@@ -216,8 +230,18 @@ then
         echo -e "${GREEN}[+]${BLUE} Scanning with nikto"
         echo -e "${GREEN}[+]${BLUE} Scanning Operating systems"
         echo -e "${GREEN}[+]${BLUE} Scanning Virtul hosts"
-        echo -e "${GREEN}[+]${BLUE} Scanning Directories" 
+        echo -e "${GREEN}[+]${BLUE} Scanning Directories${NC}" 
 #       echo -e "Something went wrong maybe"
-        simple_ports | simple_directories | simple_vhosts | simple_nikto_scan | advanced_nmap
-        echo -e "${GREEN}[+]${RED} ALL SCANS HAVE FINISHED RUNNING!"
+        nmap -Pn -oX enum/nmap.xml -T4 $rhost | simple_ports | simple_directories | simple_vhosts | simple_nikto_scan | advanced_nmap 
+fi
+
+OPEN_PORTS=$(${PATH_TO_NMAP_PARSE_OUTPUT} enum/nmap.xml ports)
+
+smbmap
+
+if [[  -z "$(cat enum/smb/smbmap_$rhost.txt | grep ":445")"  ]]
+    then
+            echo -e "${BLUE}PORT 445 IS OPEN ${NC}"
+    else
+            echo -e "${RED}PORT 445 IS CLOSED${NC}"
 fi
