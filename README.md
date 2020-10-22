@@ -5,8 +5,8 @@ This is a simple bash script that takes an ip and/or a port and performs lots of
 ## Setup:
 
 ```
-git clone https://github.com/fieldraccoon/LinuxEnumerator.git
-cd LinuxEnumerator
+git clone https://github.com/fieldraccoon/hostEnumerator.git
+cd HostEnumerator
 ./install.sh
 ```
 ## Running it
