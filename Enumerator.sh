@@ -241,7 +241,7 @@ smbmap
 
 if [[  -z "$(cat enum/smb/smbmap_$rhost.txt | grep ":445")"  ]]
     then
-            echo -e "${BLUE}PORT 445 IS OPEN ${NC}"
+            echo -e "${BLUE}[+] PORT 445 IS OPEN YOU CAN CONNECT WITH SMB${NC}"
     else
             echo -e "${RED}PORT 445 IS CLOSED${NC}"
 fi
