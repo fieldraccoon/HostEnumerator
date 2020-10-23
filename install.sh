@@ -3,4 +3,6 @@
 sudo apt install gobuster wfuzz ffuf nmap nikto
 cd /opt 
 git clone https://github.com/ernw/nmap-parse-output.git
+chmod +x /opt/nmap-parse-output/nmap-parse-output
+
 
