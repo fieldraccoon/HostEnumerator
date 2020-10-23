@@ -9,6 +9,10 @@ git clone https://github.com/fieldraccoon/HostEnumerator.git
 cd HostEnumerator
 ./install.sh
 ```
+
+## Services it detects so far
+- Smb
+
 ## Running it
 
 ```bash
