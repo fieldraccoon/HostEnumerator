@@ -16,7 +16,7 @@ cd HostEnumerator
 ## Running it
 
 ```bash
-sudo ./file.sh -i 10.10.10.211 -p 8000                                                                                                                                                                                             3 ⚙
+sudo ./file.sh -i 10.10.10.211                                                                                                                                                                                            3 ⚙
 YOU ARE RUNNING AS ROOT!
 
  _     _                  _____
