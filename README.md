@@ -37,15 +37,12 @@ YOU ARE RUNNING AS ROOT!
 
 ## Examples
 
-```bash
-./Enumerator.sh -i 10.10.10.211 -p 8000
-```
 
 ```bash
 ./Enumerator.sh -i 10.10.10.211
 ```
 ```bash
-./Enumerator.sh -i 10.10.10.211 --wordlist=/usr/share/wordlists/dirbuster/commmon.txt
+./Enumerator.sh -i 10.10.10.211 -w=/usr/share/wordlists/dirbuster/commmon.txt
 ```
 ## Output
   
@@ -53,14 +50,17 @@ YOU ARE RUNNING AS ROOT!
   
   ```bash
   $ ls *                                                                                                                         2 ⚙
+nmap_version.xml  nmap.xml  summary-10.10.10.214.txt
+
 dirs:
-wfuzz-10.10.10.211.txt
+gobuster-10.10.10.214.txt
 
 misc:
-10.10.10.211-8000-OS.txt  gobuster-vhosts-10.10.10.211-8000.txt  nikto-scan-10.10.10.211-8000.txt
+advanced-nmap-10.10.10.214-scan.txt  gobuster-10.10.10.214-vhosts.txt  nikto-10.10.10.214.txt
 
 ports:
-advanced-nmap-10.10.10.211-port-8000.txt
+nmap.txt  nmap_version-10.10.10.214.txt
+
 ```
 
 
