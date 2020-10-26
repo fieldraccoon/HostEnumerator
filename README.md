@@ -63,4 +63,6 @@ nmap.txt  nmap_version-10.10.10.214.txt
 
 ```
 
+Outputs a Summary file with all the important information you might need including example commands, services and more
+
 
