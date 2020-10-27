@@ -95,7 +95,7 @@ if [[ $rhost == "" ]] && [[ $rport == "" ]]
 then
 	usage
 else
-        nikto --host $rhost --port $rport > enum/misc/nikto-scan-$rhost-$rport.txt
+        nikto --host http://$rhost --port $rport > enum/misc/nikto-scan-$rhost-$rport.txt
 
 fi
 }
@@ -185,7 +185,7 @@ if [[  $rhost == ""  ]]
 then
 	usage
 else
-        nikto -h $rhost > enum/misc/nikto-$rhost.txt
+        nikto -h http://$rhost > enum/misc/nikto-$rhost.txt
 fi
 }
 
